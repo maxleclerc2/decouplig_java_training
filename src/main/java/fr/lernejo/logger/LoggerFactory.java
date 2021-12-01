@@ -7,7 +7,9 @@ public class LoggerFactory {
             name,
             new CompositeLogger(
                 new ConsoleLogger(),
-                new FileLogger("./logs.txt")
+                new FilteredLogger(new FileLogger("./logs.txt"),
+                    message -> message.contains("simulation")
+                )
             )
         );
     }
