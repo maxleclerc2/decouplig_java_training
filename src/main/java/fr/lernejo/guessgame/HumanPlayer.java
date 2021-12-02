@@ -33,6 +33,6 @@ public class HumanPlayer implements Player {
     @Override
     public void respond(boolean lowerOrGreater) {
         if (!lowerOrGreater) logger.log("The number is lower.");
-        else logger.log("The number is higher.");
+        else logger.log("The number is greater.");
     }
 }

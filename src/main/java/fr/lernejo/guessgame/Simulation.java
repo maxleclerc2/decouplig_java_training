@@ -51,9 +51,8 @@ public class Simulation {
         long timeInGame = gameEnd - gameBegin;
 
         if (continueGame) {
-            logger.log("Well done! The number was " + numberToGuess);
-            logger.log("It took you " + tryNumber + " tries.");
-        } else logger.log("Too bad! The number to guess was " + numberToGuess);
+            logger.log("Well done! The number was " + numberToGuess + ". It took you " + tryNumber + " tries.");
+        } else logger.log("Too bad! The number to guess was " + numberToGuess + ", end of the game.");
 
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss.SSS");
         Date resultTime = new Date(timeInGame);

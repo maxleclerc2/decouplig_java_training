@@ -4,21 +4,30 @@ import fr.lernejo.logger.Logger;
 import fr.lernejo.logger.LoggerFactory;
 
 import java.security.SecureRandom;
+import java.util.ArrayList;
 
 public class ComputerPlayer implements Player {
     private final Logger logger = LoggerFactory.getLogger("computer");
-    private long lastGuess = 0;
-    private long minLimit = 0;
-    private long maxLimit = 100;
+    private final ArrayList<Long> list = new ArrayList<>();
+    private int f;
+    private int l;
+    private int mid;
+
+    public ComputerPlayer() {
+        f = 0;
+
+        for (long i = 0; i < 100; i++) {
+            list.add(i);
+        }
+
+        l = list.size() - 1;
+        mid = (f + l)/2;
+    }
 
     @Override
     public long askNextGuess() {
-        SecureRandom random = new SecureRandom();
-        long guess = random.nextLong(minLimit, maxLimit);
-
+        long guess = list.get(mid);
         logger.log("Guessed " + guess);
-
-        lastGuess = guess;
         return guess;
     }
 
@@ -26,10 +35,11 @@ public class ComputerPlayer implements Player {
     public void respond(boolean lowerOrGreater) {
         if (!lowerOrGreater) {
             logger.log("The number is lower.");
-            maxLimit = lastGuess;
+            l = mid - 1;
         } else {
-            logger.log("The number is higher.");
-            minLimit = lastGuess;
+            logger.log("The number is greater.");
+            f = mid + 1;
         }
+        mid = (f + l)/2;
     }
 }
